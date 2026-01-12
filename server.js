@@ -7,10 +7,11 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: ['https://alienfront.vercel.app', 'http://localhost:5173'],
-    methods: ['GET', 'POST'],
-    credentials: true
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-client-id', 'x-client-secret', 'x-api-version']
 }));
+app.options('*', cors());
 app.use(express.json());
 
 const APP_MODE = process.env.APP_MODE || 'TEST';
